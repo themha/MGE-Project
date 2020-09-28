@@ -20,7 +20,7 @@ Ideen tauchen in einem Feed auf.
 | Ressourcen: Unterschiedliche Styles          | 1-2       |
 | Integration von Drittkomponenten (Libraries) | 1-3       |
 | Sinnvolles Testing (Unit- / UI-Testing)      | 1-3       |
-| **TOTAL**                                    |           |
+| **TOTAL**                                    | 12-30      |
 
 
 Mögliche Funktionen sind Formulare zur Erzeugung/Bearbeitung einzelner Objekte und das liken/disliken von Ideen. Eine weitere Aktivität ist die Detailansicht einer Idee. Die erfassten Daten könnte man in einer einfachen zentralen Datenbank sammeln und global verfügbar machen (Webservices). Notifications für Updates der eigens veröffentlichten Ideen, das erstellen sowie hinterlegen von Bildern zur besseren Visualisierung einer konkreten Idee (Sensor) und Anzeige der lokalen Akzeptanz (Lokalisierung) sind mögliche Erweiterungen des Projektes.
