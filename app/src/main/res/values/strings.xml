@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Testat</string>
+    <string name="feed_item_text_tags">Tags</string>
+    <string name="feed_item_text_title">Title</string>
+</resources>
