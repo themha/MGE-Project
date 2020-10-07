@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ost.rj.mge.testat.R
@@ -37,4 +38,13 @@ class FeedActivity : AppCompatActivity() {
 
 
     }
+
+    /*
+    override fun onItemClick(position: Int) {
+        val feedActivityIntent : Intent = FeedDetailActivity.createIntent(this)
+        Log.d("ouuuuuuuuuu", "onItemClick: ${IdeaRepository.getIdeas()[position].title}")
+        startActivity(feedActivityIntent)
+    }
+
+     */
 }

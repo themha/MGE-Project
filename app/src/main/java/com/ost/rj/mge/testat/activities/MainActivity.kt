@@ -17,11 +17,11 @@ class MainActivity : AppCompatActivity() {
 
         val feedTestButton : Button = findViewById<Button>(R.id.button_test_to_feed)
         feedTestButton.setOnClickListener {
-            showFeedActivity()
+            buildFeedActivity()
         }
     }
 
-    private fun showFeedActivity(){
+    private fun buildFeedActivity(){
         val feedActivityIntent : Intent = FeedActivity.createIntent(this)
         startActivity(feedActivityIntent)
     }

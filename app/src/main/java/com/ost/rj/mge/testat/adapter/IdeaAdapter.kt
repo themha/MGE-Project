@@ -4,13 +4,16 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.ost.rj.mge.testat.R
 import com.ost.rj.mge.testat.model.Idea
 
-class IdeaAdapter(ideas: ArrayList<Idea>): RecyclerView.Adapter<IdeaViewHolder>() {
-    private val ideas: ArrayList<Idea> = ideas
+class IdeaAdapter(
+    private val ideas: ArrayList<Idea>,
+
+): RecyclerView.Adapter<IdeaViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): IdeaViewHolder {
         val context : Context = parent.context
@@ -33,11 +36,16 @@ class IdeaAdapter(ideas: ArrayList<Idea>): RecyclerView.Adapter<IdeaViewHolder>(
         holder.title.text = idea.title
         holder.tags.text = idea.tags
 
+
     }
 
     override fun getItemCount(): Int {
         return this.ideas.size
 
+    }
+
+    interface OnItemClickListener {
+        fun onItemClick(position: Int)
     }
 
 }
