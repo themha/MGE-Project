@@ -17,7 +17,7 @@ class IdeaViewHolder(
     var title: TextView,
     var tags: TextView
 ) : RecyclerView.ViewHolder(parent) {
-
+ /*
     init {
         parent.setOnClickListener{ v: View ->
 
@@ -39,7 +39,9 @@ class IdeaViewHolder(
     private fun buildFeedDetailActivity(context : Context, title: String, tags: String) {
         val feedActivityIntent : Intent = FeedDetailActivity.createIntent(context, title, tags)
         context.startActivity(feedActivityIntent)
-    }
+    }  */
+
+
 
     /*
     override fun onClick(v: View?) {
@@ -52,4 +54,6 @@ class IdeaViewHolder(
     }
 
      */
+
+
 }

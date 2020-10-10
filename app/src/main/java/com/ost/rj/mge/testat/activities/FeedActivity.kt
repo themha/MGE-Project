@@ -10,11 +10,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ost.rj.mge.testat.R
 import com.ost.rj.mge.testat.adapter.IdeaAdapter
 import com.ost.rj.mge.testat.adapter.IdeaViewHolder
+import com.ost.rj.mge.testat.adapter.OnItemClickListener
 import com.ost.rj.mge.testat.model.Idea
 import com.ost.rj.mge.testat.model.IdeaRepository
 
 class FeedActivity : AppCompatActivity() {
-    lateinit var adapter : RecyclerView.Adapter<IdeaViewHolder>
+    private lateinit var adapter : RecyclerView.Adapter<IdeaViewHolder>
 
     companion object {
 
@@ -29,7 +30,7 @@ class FeedActivity : AppCompatActivity() {
         setContentView(R.layout.activity_feed)
 
         val layoutManager : RecyclerView.LayoutManager = LinearLayoutManager(this)
-        adapter = IdeaAdapter(IdeaRepository.getIdeas())
+        adapter = IdeaAdapter(IdeaRepository.getIdeas(), ::onItemClick)
 
 
         val recyclerView : RecyclerView = findViewById(R.id.feed)
@@ -39,12 +40,12 @@ class FeedActivity : AppCompatActivity() {
 
     }
 
-    /*
-    override fun onItemClick(position: Int) {
-        val feedActivityIntent : Intent = FeedDetailActivity.createIntent(this)
-        Log.d("ouuuuuuuuuu", "onItemClick: ${IdeaRepository.getIdeas()[position].title}")
-        startActivity(feedActivityIntent)
+    private fun onItemClick(idea : Idea) {
+        buildFeedDetailActivity(idea.title, idea.tags)
     }
 
-     */
+    private fun buildFeedDetailActivity(title: String, tags: String) {
+        val feedActivityIntent : Intent = FeedDetailActivity.createIntent(this, title, tags)
+        startActivity(feedActivityIntent)
+    }
 }
