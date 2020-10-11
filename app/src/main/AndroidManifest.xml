@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.FeedDetailActivity"></activity>
+        <activity android:name=".activities.IdeaFormActivity"></activity>
+        <activity android:name=".activities.FeedItemDetailActivity" />
         <activity android:name=".activities.FeedActivity" />
         <activity android:name=".activities.MainActivity">
             <intent-filter>
@@ -19,5 +20,9 @@
             </intent-filter>
         </activity>
     </application>
+
+    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <!--<uses-permission android:name="android.permission.INTERNET"/>-->
 
 </manifest>

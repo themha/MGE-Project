@@ -4,13 +4,13 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
 import com.ost.rj.mge.testat.R
 import com.ost.rj.mge.testat.adapter.IdeaAdapter
 import com.ost.rj.mge.testat.adapter.IdeaViewHolder
-import com.ost.rj.mge.testat.adapter.OnItemClickListener
 import com.ost.rj.mge.testat.model.Idea
 import com.ost.rj.mge.testat.model.IdeaRepository
 
@@ -37,6 +37,16 @@ class FeedActivity : AppCompatActivity() {
         recyclerView.layoutManager = layoutManager
         recyclerView.adapter = adapter
 
+        val fabButtonAdd: View = findViewById(R.id.feed_fab_add_idea)
+        fabButtonAdd.setOnClickListener {
+            buildIdeaFormActivity()
+            /*
+            view -> Snackbar.make(view, "Start activity for adding new ideas", Snackbar.LENGTH_LONG)
+            .setAction("Action", null)
+            .show()
+
+             */
+        }
 
     }
 
@@ -45,7 +55,12 @@ class FeedActivity : AppCompatActivity() {
     }
 
     private fun buildFeedDetailActivity(title: String, tags: String) {
-        val feedActivityIntent : Intent = FeedDetailActivity.createIntent(this, title, tags)
+        val feedActivityIntent : Intent = FeedItemDetailActivity.createIntent(this, title, tags)
         startActivity(feedActivityIntent)
+    }
+
+    private fun buildIdeaFormActivity(){
+        val ideaFormActivity : Intent = IdeaFormActivity.createIntent(this)
+        startActivity(ideaFormActivity)
     }
 }

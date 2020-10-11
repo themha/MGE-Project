@@ -1,15 +1,8 @@
 package com.ost.rj.mge.testat.adapter
 
-import android.content.Context
-import android.content.Intent
 import android.view.View
 import android.widget.TextView
-import android.widget.Toast
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
-import com.ost.rj.mge.testat.activities.FeedDetailActivity
-import com.ost.rj.mge.testat.model.Idea
-import com.ost.rj.mge.testat.model.IdeaRepository
 
 
 class IdeaViewHolder(

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    tools:context=".activities.FeedItemDetailActivity">
+
+    <TextView
+        android:id="@+id/feed_item_detail_textView_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Title"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/feed_item_detail_textView_tags"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tags"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/feed_item_detail_textView_title" />
+
+    <ImageButton
+        android:id="@+id/feed_item_detail_imageButton_voteUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_baseline_keyboard_arrow_up_24" />
+
+    <ImageButton
+        android:id="@+id/feed_item_detail_imageButton_voteDown"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/feed_item_detail_imageButton_voteUp"
+        app:srcCompat="@drawable/ic_baseline_keyboard_arrow_down_24" />
+
+    <TextView
+        android:id="@+id/feed_item_detail_textView_description"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="@string/lorem_ipsum_text_100"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/barrier2" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="feed_item_detail_imageButton_voteUp,feed_item_detail_textView_title,feed_item_detail_imageButton_voteDown,feed_item_detail_textView_tags"
+        tools:layout_editor_absoluteX="20dp"
+        tools:layout_editor_absoluteY="711dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
