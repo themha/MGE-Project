@@ -1,34 +1,30 @@
 package com.ost.rj.mge.testat.activities
 
-import android.Manifest
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
-import android.os.Build
 import android.os.Bundle
-import android.speech.RecognitionListener
 import android.speech.RecognizerIntent
-import android.speech.SpeechRecognizer
-import android.util.Log
 import android.view.MotionEvent
+import android.view.View
 import android.widget.EditText
-import android.widget.Toast
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import com.ost.rj.mge.testat.R
 import java.util.*
 
 
 class IdeaFormActivity : AppCompatActivity() {
+    private lateinit var title : EditText
+    private lateinit var tags : EditText
     private lateinit var description : EditText
-    private lateinit var speechRecognizerIntent : Intent
-    private lateinit var speechRecognizer : SpeechRecognizer
+
 
     companion object {
 
-        private const val REQUEST_CODE_SPEECH_INPUT = 100
+        private const val REQUEST_CODE_SPEECH_INPUT_TITLE = 100
+        private const val REQUEST_CODE_SPEECH_INPUT_TAGS = 101
+        private const val REQUEST_CODE_SPEECH_INPUT_DESCRIPTION = 102
 
         fun createIntent(context: Context) : Intent {
             val intent : Intent = Intent(context, IdeaFormActivity::class.java)
@@ -40,132 +36,68 @@ class IdeaFormActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_idea_form)
 
+        title = findViewById(R.id.idea_form_editText_title)
+        title.setOnTouchListener {view : View, motionEvent -> setDrawableActions(motionEvent, title, REQUEST_CODE_SPEECH_INPUT_TITLE) }
 
-        //TODO ugly
+        tags = findViewById(R.id.idea_form_editText_tags)
+        tags.setOnTouchListener {view : View, motionEvent -> setDrawableActions(motionEvent, tags, REQUEST_CODE_SPEECH_INPUT_TAGS) }
 
         description = findViewById(R.id.idea_form_editText_description)
-
-        description.setOnTouchListener { _, event ->
-            val DRAWABLE_LEFT = 0
-            val DRAWABLE_TOP = 1
-            val DRAWABLE_RIGHT = 2
-            val DRAWABLE_BOTTOM = 3
-
-            if (event.action == MotionEvent.ACTION_DOWN) {
-                if (event.getRawX() >= description.right - description.compoundDrawables[DRAWABLE_RIGHT].bounds.width()) {
-                    prepareRecording()
-                    true
-                }
-            }
-
-            false
-        }
+        description.setOnTouchListener {_, motionEvent -> setDrawableActions(motionEvent, description, REQUEST_CODE_SPEECH_INPUT_DESCRIPTION) }
     }
 
 
-    // TODO ugly
-    private fun prepareRecording() {
-        Log.d("testcase", "startRecord: yes")
-        /*
-        val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
-        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM)
-        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault())
-        intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Let's start speaking")
+    private fun setDrawableActions(event : MotionEvent, element : TextView, requestCode : Int) : Boolean {
+        val DRAWABLE_LEFT = 0
+        val DRAWABLE_TOP = 1
+        val DRAWABLE_RIGHT = 2
+        val DRAWABLE_BOTTOM = 3
 
-         */
-
-        if(ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED){
-            checkPermission()
+        if (event.action == MotionEvent.ACTION_DOWN) {
+            if (event.getRawX() >= element.right - element.compoundDrawables[DRAWABLE_RIGHT].bounds.width()) {
+                val intent = startSpeechToTextIntent()
+                startActivityForResult(intent, requestCode)
+                return true;
+            }
         }
+        return false;
+    }
 
-        speechRecognizer = SpeechRecognizer.createSpeechRecognizer(this);
-        speechRecognizerIntent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH); // starts an activity that will prompt the user for speech and send it through a speech recognizer
+
+    private fun startSpeechToTextIntent() : Intent {
+        val speechRecognizerIntent : Intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH); // starts an activity that will prompt the user for speech and send it through a speech recognizer
         speechRecognizerIntent.putExtra(
             RecognizerIntent.EXTRA_LANGUAGE_MODEL,
             RecognizerIntent.LANGUAGE_MODEL_FREE_FORM
-        );
+        )
         speechRecognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault())
         speechRecognizerIntent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Let's start speaking")
-
-        startActivityForResult(speechRecognizerIntent, REQUEST_CODE_SPEECH_INPUT)
-
-        /*
-        speechRecognizer.setRecognitionListener(object : RecognitionListener {
-
-            override fun onReadyForSpeech(params: Bundle?) {}
-
-            override fun onBeginningOfSpeech() {
-                description.hint = "Listening..."
-            }
-
-            override fun onRmsChanged(v: Float) {}
-
-            override fun onBufferReceived(bytes: ByteArray?) {}
-
-            override fun onEndOfSpeech() {}
-
-            override fun onError(i: Int) {}
-
-            override fun onResults(bundle: Bundle) {
-                val data = bundle.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION)
-                description.setText(data!![0].toString())
-
-            }
-
-            override fun onPartialResults(bundle: Bundle?) {}
-
-            override fun onEvent(i: Int, bundle: Bundle?) {}
-
-        })
-
-         */
-
-
+        return speechRecognizerIntent
     }
-
-
-
-
-
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
         when(requestCode){
-            REQUEST_CODE_SPEECH_INPUT -> {
-                if (resultCode == Activity.RESULT_OK && null != data){
-                    val result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
-                    description.append(result!![0])
+            REQUEST_CODE_SPEECH_INPUT_TITLE -> {
+                onActivityResultSpeechToTextHandler(title, resultCode, data)
+            }
 
-                }
+            REQUEST_CODE_SPEECH_INPUT_TAGS -> {
+                onActivityResultSpeechToTextHandler(tags, resultCode, data)
+            }
+
+            REQUEST_CODE_SPEECH_INPUT_DESCRIPTION -> {
+                onActivityResultSpeechToTextHandler(description, resultCode, data)
             }
         }
     }
 
+    private fun onActivityResultSpeechToTextHandler(element: TextView, resultCode : Int, data: Intent?){
+        if (resultCode == Activity.RESULT_OK && data != null){
+            val result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
+            element.append(result!![0])
 
-
-    private fun checkPermission(){
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            ActivityCompat.requestPermissions(
-                this,
-                arrayOf(Manifest.permission.RECORD_AUDIO),
-                REQUEST_CODE_SPEECH_INPUT
-            )
-        }
-    }
-
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<String?>,
-        grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == REQUEST_CODE_SPEECH_INPUT && grantResults.isNotEmpty()) {
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) Toast.makeText(
-                this,
-                "Permission Granted",
-                Toast.LENGTH_SHORT
-            ).show()
         }
     }
 }

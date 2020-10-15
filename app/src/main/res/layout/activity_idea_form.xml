@@ -20,7 +20,8 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/idea_form_editText_title"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:drawableRight="@drawable/ic_baseline_mic_24" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -37,30 +38,43 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/idea_form_editText_tags"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:drawableRight="@drawable/ic_baseline_mic_24" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/idea_form_textView_description"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:hint="Description"
-
         android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/idea_form_button_save"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/idea_form_textView_tags"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        app:layout_constraintTop_toBottomOf="@+id/idea_form_textView_tags">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/idea_form_editText_description"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textMultiLine"
-            android:drawableRight="@drawable/ic_baseline_mic_24"/>
+            android:layout_height="match_parent"
+            android:drawableRight="@drawable/ic_baseline_mic_24"
+            android:gravity="top|left"
+            android:inputType="textMultiLine" />
 
     </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/idea_form_button_save"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Save"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:layout_editor_absoluteX="63dp"
+        tools:layout_editor_absoluteY="701dp" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

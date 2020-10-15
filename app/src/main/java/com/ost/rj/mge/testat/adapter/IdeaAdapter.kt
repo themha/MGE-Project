@@ -55,7 +55,3 @@ class IdeaAdapter(
     }
 
 }
-
-interface OnItemClickListener {
-    fun onItemClick(idea : Idea)
-}
