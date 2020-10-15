@@ -5,6 +5,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import com.ost.rj.mge.testat.R
+import com.ost.rj.mge.testat.activities.FeedActivity.Companion.createIntent
+import com.ost.rj.mge.testat.activities.IdeaFormActivity.Companion.createIntent
+import com.ost.rj.mge.testat.view.LoginPage
 
 class MainActivity : AppCompatActivity() {
 
@@ -22,7 +25,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun buildFeedActivity(){
-        val feedActivityIntent : Intent = FeedActivity.createIntent(this)
+        val feedActivityIntent : Intent = LoginPage.createIntent(this)
         startActivity(feedActivityIntent)
     }
 
