@@ -3,7 +3,6 @@
     package="com.ost.rj.mge.testat">
 
     <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" />
-    <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
     <application
         android:allowBackup="true"
@@ -25,9 +24,4 @@
         </activity>
     </application>
 
-<<<<<<< HEAD
-    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" />
-
-=======
->>>>>>> b121f3bd019882709a290d1d1346139e7f6c9d62
 </manifest>
