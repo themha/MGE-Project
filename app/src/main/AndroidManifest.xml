@@ -24,10 +24,5 @@
             </intent-filter>
         </activity>
     </application>
-
-<<<<<<< HEAD
     <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" />
-
-=======
->>>>>>> b121f3bd019882709a290d1d1346139e7f6c9d62
 </manifest>
