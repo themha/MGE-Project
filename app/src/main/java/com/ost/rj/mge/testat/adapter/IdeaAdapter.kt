@@ -4,16 +4,14 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.ost.rj.mge.testat.IdeaApplication.Companion.ideaRepository
 import com.ost.rj.mge.testat.R
 import com.ost.rj.mge.testat.model.Idea
-import com.ost.rj.mge.testat.model.IdeaRepository
 
 class IdeaAdapter(
-    private val ideas: ArrayList<Idea>,
+    private val ideas: List<Idea>,
     //private val clickListener: OnItemClickListener
     private val clickListener: (idea: Idea) -> Unit
 
@@ -42,16 +40,13 @@ class IdeaAdapter(
 
         holder.itemView.setOnClickListener {v: View ->
             if (position != RecyclerView.NO_POSITION){
-                val idea : Idea = IdeaRepository.getIdeas()[position]
-
-                clickListener(idea)
+                val idea : Idea = (ideaRepository?.getIdeas()?.get(position) ?: clickListener(idea)) as Idea
             }
         }
     }
 
     override fun getItemCount(): Int {
         return this.ideas.size
-
     }
 
 }

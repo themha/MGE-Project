@@ -7,12 +7,11 @@ import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.snackbar.Snackbar
+import com.ost.rj.mge.testat.IdeaApplication.Companion.ideaRepository
 import com.ost.rj.mge.testat.R
 import com.ost.rj.mge.testat.adapter.IdeaAdapter
 import com.ost.rj.mge.testat.adapter.IdeaViewHolder
 import com.ost.rj.mge.testat.model.Idea
-import com.ost.rj.mge.testat.model.IdeaRepository
 
 class FeedActivity : AppCompatActivity() {
     private lateinit var adapter : RecyclerView.Adapter<IdeaViewHolder>
@@ -20,8 +19,7 @@ class FeedActivity : AppCompatActivity() {
     companion object {
 
         fun createIntent(context: Context) : Intent {
-            val intent : Intent = Intent(context, FeedActivity::class.java)
-            return intent
+            return Intent(context, FeedActivity::class.java)
         }
     }
 
@@ -30,7 +28,7 @@ class FeedActivity : AppCompatActivity() {
         setContentView(R.layout.activity_feed)
 
         val layoutManager : RecyclerView.LayoutManager = LinearLayoutManager(this)
-        adapter = IdeaAdapter(IdeaRepository.getIdeas(), ::onItemClick)
+        adapter = IdeaAdapter(ideaRepository?.getIdeas() as List<Idea>, ::onItemClick)
 
 
         val recyclerView : RecyclerView = findViewById(R.id.feed)
@@ -51,11 +49,11 @@ class FeedActivity : AppCompatActivity() {
     }
 
     private fun onItemClick(idea : Idea) {
-        buildFeedDetailActivity(idea.title, idea.tags)
+        buildFeedDetailActivity(idea.title, idea.tags, idea.description)
     }
 
-    private fun buildFeedDetailActivity(title: String, tags: String) {
-        val feedActivityIntent : Intent = FeedItemDetailActivity.createIntent(this, title, tags)
+    private fun buildFeedDetailActivity(title: String?, tags: String?, description: String?) {
+        val feedActivityIntent : Intent = FeedItemDetailActivity.createIntent(this, title, tags, description)
         startActivity(feedActivityIntent)
     }
 

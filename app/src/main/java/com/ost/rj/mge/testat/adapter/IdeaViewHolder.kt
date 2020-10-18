@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 class IdeaViewHolder(
     parent: View,
     var title: TextView,
-    var tags: TextView
+    var tags: TextView,
 ) : RecyclerView.ViewHolder(parent) {
  /*
     init {

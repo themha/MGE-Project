@@ -87,9 +87,6 @@ class LoginPage : AppCompatActivity() {
         }
         passwordEditText.addTextChangedListener(passwordWatcher);
         updateLoginButton();
-
-
-
     }
 
 }

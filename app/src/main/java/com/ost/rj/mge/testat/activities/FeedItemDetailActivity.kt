@@ -12,15 +12,20 @@ class FeedItemDetailActivity : AppCompatActivity() {
 
     private lateinit var title : String
     private lateinit var tags : String
+    private lateinit var description : String
+
 
     companion object {
         private const val FEED_IDEA_TITLE = "title"
         private const val FEED_IDEA_TAGS = "tags"
+        private const val FEED_IDEA_DESCRIPTION = "description"
 
-        fun createIntent(context: Context, title : String, tags : String) : Intent {
+
+        fun createIntent(context: Context, title : String?, tags : String?, description: String?) : Intent {
             val intent : Intent = Intent(context, FeedItemDetailActivity::class.java)
             intent.putExtra(FEED_IDEA_TITLE, title)
             intent.putExtra(FEED_IDEA_TAGS, tags)
+            intent.putExtra(FEED_IDEA_DESCRIPTION, description)
             return intent
         }
     }
@@ -31,11 +36,14 @@ class FeedItemDetailActivity : AppCompatActivity() {
 
         title = intent.getStringExtra(FEED_IDEA_TITLE)!!
         tags = intent.getStringExtra(FEED_IDEA_TAGS)!!
+        description = intent.getStringExtra(FEED_IDEA_DESCRIPTION)!!
 
         val titleTestView : TextView = findViewById<Button>(R.id.feed_item_detail_textView_title)
         titleTestView.text = title
         val tagsTestView : TextView = findViewById<Button>(R.id.feed_item_detail_textView_tags)
         tagsTestView.text = tags
+        val descriptionTestView : TextView = findViewById<Button>(R.id.feed_item_detail_textView_description)
+        descriptionTestView.text = description
 
     }
 }
