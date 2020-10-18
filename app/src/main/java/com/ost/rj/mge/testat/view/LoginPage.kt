@@ -15,6 +15,10 @@ import com.ost.rj.mge.testat.activities.FeedActivity
 
 class LoginPage : AppCompatActivity() {
 
+    private lateinit var emailEditText: EditText
+    private lateinit var passwordEditText: EditText
+    private lateinit var feedButton: Button
+
     companion object {
 
         fun createIntent(context: Context) : Intent {
@@ -31,31 +35,22 @@ class LoginPage : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login_page)
-        val emailEditText: EditText = findViewById(R.id.editTextTextPersonName)
-        val passwordEditText : EditText = findViewById(R.id.editTextTextPassword);
-        val feedButton : Button = findViewById(R.id.feedbutton)
+
+
+
+        feedButton = findViewById(R.id.feedbutton)
         feedButton.setOnClickListener {
             val feedActivityIntent : Intent = FeedActivity.createIntent(this)
             startActivity(feedActivityIntent)
-        }
-        fun isValidEmail(email: String?): Boolean {
-            return Patterns.EMAIL_ADDRESS.matcher(email).matches()
-        }
-        fun hasInvalidInput(editText: EditText): Boolean {
-            return editText.text.length == 0 || editText.error != null
-        }
-        fun updateLoginButton() {
-            val emailHasError = hasInvalidInput(emailEditText);
-            val passwordHasError = hasInvalidInput(passwordEditText);
-            val buttonIsEnabled = !emailHasError && !passwordHasError;
-            val buttonAlpha = if (buttonIsEnabled)  FULL_VISIBLE_ALPHA else HALF_VISIBLE_ALPHA;
 
-            feedButton.setEnabled(buttonIsEnabled);
-            feedButton.setAlpha(buttonAlpha);
         }
 
+
+
+        emailEditText = findViewById(R.id.editTextTextPersonName)
         val textWatcher = object : TextWatcher {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+
             override fun afterTextChanged(s: Editable?) {
                 val email = emailEditText.getText().toString();
                 val isValidEmail = isValidEmail(email);
@@ -67,11 +62,15 @@ class LoginPage : AppCompatActivity() {
                 }
                 updateLoginButton();
             }
+
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
         }
 
-        emailEditText.addTextChangedListener(textWatcher);
+        emailEditText.addTextChangedListener(textWatcher)
 
+
+
+        passwordEditText = findViewById(R.id.editTextTextPassword)
         val passwordWatcher = object: TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
@@ -85,8 +84,28 @@ class LoginPage : AppCompatActivity() {
                 updateLoginButton();
             }
         }
-        passwordEditText.addTextChangedListener(passwordWatcher);
-        updateLoginButton();
+
+        passwordEditText.addTextChangedListener(passwordWatcher)
+
+        updateLoginButton()
+    }
+
+    fun isValidEmail(email: String?): Boolean {
+        return Patterns.EMAIL_ADDRESS.matcher(email).matches()
+    }
+
+    private fun hasInvalidInput(editText: EditText): Boolean {
+        return editText.text.length == 0 || editText.error != null
+    }
+
+    fun updateLoginButton() {
+        val emailHasError = hasInvalidInput(emailEditText);
+        val passwordHasError = hasInvalidInput(passwordEditText);
+        val buttonIsEnabled = !emailHasError && !passwordHasError;
+        val buttonAlpha = if (buttonIsEnabled)  FULL_VISIBLE_ALPHA else HALF_VISIBLE_ALPHA;
+
+        feedButton.setEnabled(buttonIsEnabled);
+        feedButton.setAlpha(buttonAlpha);
     }
 
 }

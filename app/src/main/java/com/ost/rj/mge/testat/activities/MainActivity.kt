@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import com.ost.rj.mge.testat.IdeaApplication
-import com.ost.rj.mge.testat.IdeaApplication.Companion.ideaRepository
 import com.ost.rj.mge.testat.R
 import com.ost.rj.mge.testat.activities.FeedActivity.Companion.createIntent
 import com.ost.rj.mge.testat.activities.IdeaFormActivity.Companion.createIntent

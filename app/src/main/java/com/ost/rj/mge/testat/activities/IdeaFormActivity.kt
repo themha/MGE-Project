@@ -7,10 +7,12 @@ import android.os.Bundle
 import android.speech.RecognizerIntent
 import android.view.MotionEvent
 import android.view.View
+import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.ost.rj.mge.testat.R
+import com.ost.rj.mge.testat.model.IdeaRepository
 import java.util.*
 
 
@@ -18,6 +20,7 @@ class IdeaFormActivity : AppCompatActivity() {
     private lateinit var title : EditText
     private lateinit var tags : EditText
     private lateinit var description : EditText
+    private lateinit var saveButton : Button
 
 
     companion object {
@@ -27,8 +30,8 @@ class IdeaFormActivity : AppCompatActivity() {
         private const val REQUEST_CODE_SPEECH_INPUT_DESCRIPTION = 102
 
         fun createIntent(context: Context) : Intent {
-            val intent : Intent = Intent(context, IdeaFormActivity::class.java)
-            return intent
+            return Intent(context, IdeaFormActivity::class.java)
+
         }
     }
 
@@ -44,6 +47,17 @@ class IdeaFormActivity : AppCompatActivity() {
 
         description = findViewById(R.id.idea_form_editText_description)
         description.setOnTouchListener {_, motionEvent -> setDrawableActions(motionEvent, description, REQUEST_CODE_SPEECH_INPUT_DESCRIPTION) }
+
+        saveButton = findViewById(R.id.idea_form_button_save)
+        saveButton.setOnClickListener{
+
+            //TODO Input check
+
+            IdeaRepository.addIdea(title.text.toString(), tags.text.toString(), description.text.toString())
+
+            finish()
+        }
+
     }
 
 

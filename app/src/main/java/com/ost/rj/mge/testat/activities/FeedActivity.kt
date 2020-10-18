@@ -7,14 +7,14 @@ import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.ost.rj.mge.testat.IdeaApplication.Companion.ideaRepository
 import com.ost.rj.mge.testat.R
 import com.ost.rj.mge.testat.adapter.IdeaAdapter
 import com.ost.rj.mge.testat.adapter.IdeaViewHolder
 import com.ost.rj.mge.testat.model.Idea
+import com.ost.rj.mge.testat.model.IdeaRepository
 
 class FeedActivity : AppCompatActivity() {
-    private lateinit var adapter : RecyclerView.Adapter<IdeaViewHolder>
+    private lateinit var adapter : IdeaAdapter
 
     companion object {
 
@@ -23,12 +23,13 @@ class FeedActivity : AppCompatActivity() {
         }
     }
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_feed)
 
         val layoutManager : RecyclerView.LayoutManager = LinearLayoutManager(this)
-        adapter = IdeaAdapter(ideaRepository?.getIdeas() as List<Idea>, ::onItemClick)
+        adapter = IdeaAdapter(IdeaRepository.getIdeas(), ::onItemClick)
 
 
         val recyclerView : RecyclerView = findViewById(R.id.feed)
@@ -38,14 +39,15 @@ class FeedActivity : AppCompatActivity() {
         val fabButtonAdd: View = findViewById(R.id.feed_fab_add_idea)
         fabButtonAdd.setOnClickListener {
             buildIdeaFormActivity()
-            /*
-            view -> Snackbar.make(view, "Start activity for adding new ideas", Snackbar.LENGTH_LONG)
-            .setAction("Action", null)
-            .show()
 
-             */
         }
 
+    }
+
+    override fun onResume(){
+        super.onResume()
+
+        adapter.updateIdeas(IdeaRepository.getIdeas())
     }
 
     private fun onItemClick(idea : Idea) {

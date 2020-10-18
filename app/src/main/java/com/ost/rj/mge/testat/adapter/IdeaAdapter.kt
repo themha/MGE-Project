@@ -6,16 +6,20 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.ost.rj.mge.testat.IdeaApplication.Companion.ideaRepository
 import com.ost.rj.mge.testat.R
 import com.ost.rj.mge.testat.model.Idea
+import com.ost.rj.mge.testat.model.IdeaRepository
 
 class IdeaAdapter(
-    private val ideas: List<Idea>,
-    //private val clickListener: OnItemClickListener
+    private var ideas: List<Idea>,
     private val clickListener: (idea: Idea) -> Unit
 
 ): RecyclerView.Adapter<IdeaViewHolder>() {
+
+    fun updateIdeas(ideas: List<Idea>){
+        this.ideas = ideas
+        this.notifyDataSetChanged()
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): IdeaViewHolder {
         val context : Context = parent.context
@@ -40,7 +44,10 @@ class IdeaAdapter(
 
         holder.itemView.setOnClickListener {v: View ->
             if (position != RecyclerView.NO_POSITION){
-                val idea : Idea = (ideaRepository?.getIdeas()?.get(position) ?: clickListener(idea)) as Idea
+
+                val idea : Idea = IdeaRepository.getIdeas()[position]
+                clickListener(idea)
+
             }
         }
     }

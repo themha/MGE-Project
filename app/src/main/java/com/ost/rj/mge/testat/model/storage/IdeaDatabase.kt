@@ -9,6 +9,5 @@ import com.ost.rj.mge.testat.model.Idea
 abstract class IdeaDatabase : RoomDatabase() {
     abstract fun ideaDao(): IdeaDao
 
-
 }
 

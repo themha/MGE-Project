@@ -5,8 +5,7 @@ import androidx.room.Room
 import com.ost.rj.mge.testat.model.storage.IdeaDatabase
 
 
-
-public final class IdeaRepository {
+object IdeaRepository {
     private lateinit var database: IdeaDatabase
 
     fun initialize(context: Context) {
@@ -15,12 +14,14 @@ public final class IdeaRepository {
             IdeaDatabase::class.java, "idea.db"
         ).allowMainThreadQueries().build()
 
+        if(getIdeas().isEmpty()){
+            addIdea("Jetski Verleihung", "#event #adventure #experience", "Very Cool")
+            addIdea("Facebook 2.0", "#socialNetwork", "Give us your Money")
+        }
 
-        addIdea("Jetski Verleihung", "#event #adventure #experience", "Very Cool")
-        addIdea("Facebook 2.0", "#socialNetwork", "Give us your Money")
     }
 
-    public fun getIdeas(): List<Idea> {
+    fun getIdeas(): List<Idea> {
         return database.ideaDao().getIdeas()
     }
 
@@ -29,12 +30,10 @@ public final class IdeaRepository {
     }
 
     fun addIdea(title: String, tags: String, description: String): Idea {
-        val idea = Idea()
-        idea.title = title
-        idea.tags   = tags
-        idea.description = description
+        val idea = Idea(title, tags, description)
 
         addIdea(idea)
+
         return idea
     }
 }
