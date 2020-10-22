@@ -51,11 +51,11 @@ class FeedActivity : AppCompatActivity() {
     }
 
     private fun onItemClick(idea : Idea) {
-        buildFeedDetailActivity(idea.title, idea.tags, idea.description)
+        buildFeedDetailActivity(idea.title, idea.tags, idea.description, idea.likes)
     }
 
-    private fun buildFeedDetailActivity(title: String?, tags: String?, description: String?) {
-        val feedActivityIntent : Intent = FeedItemDetailActivity.createIntent(this, title, tags, description)
+    private fun buildFeedDetailActivity(title: String?, tags: String?, description: String?, likes: Int) {
+        val feedActivityIntent : Intent = FeedItemDetailActivity.createIntent(this, title, tags, description, likes)
         startActivity(feedActivityIntent)
     }
 
