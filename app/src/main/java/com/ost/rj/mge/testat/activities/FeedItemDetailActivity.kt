@@ -11,6 +11,7 @@ import com.ost.rj.mge.testat.R
 
 class FeedItemDetailActivity : AppCompatActivity() {
 
+
     private lateinit var title : String
     private lateinit var tags : String
     private lateinit var description : String
@@ -42,11 +43,12 @@ class FeedItemDetailActivity : AppCompatActivity() {
         description = intent.getStringExtra(FEED_IDEA_DESCRIPTION)!!
         likes = intent.getIntExtra(FEED_IDEA_LIKES, 0)
 
-        val titleTestView : TextView = findViewById<Button>(R.id.feed_item_detail_textView_title)
+        val titleTestView: TextView = findViewById<Button>(R.id.feed_item_detail_textView_title)
         titleTestView.text = title
-        val tagsTestView : TextView = findViewById<Button>(R.id.feed_item_detail_textView_tags)
+        val tagsTestView: TextView = findViewById<Button>(R.id.feed_item_detail_textView_tags)
         tagsTestView.text = tags
-        val descriptionTestView : TextView = findViewById<Button>(R.id.feed_item_detail_textView_description)
+        val descriptionTestView: TextView =
+            findViewById<Button>(R.id.feed_item_detail_textView_description)
         descriptionTestView.text = description
         val likesTestView : TextView = findViewById<Button>(R.id.feed_item_detail_textView_likes)
         likesTestView.text = likes.toString();
@@ -56,5 +58,14 @@ class FeedItemDetailActivity : AppCompatActivity() {
 
 
 
+        val actionBar = getSupportActionBar()
+        actionBar?.setDisplayHomeAsUpEnabled(true)
+
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+
+        return true
     }
 }
