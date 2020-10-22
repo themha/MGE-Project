@@ -6,7 +6,6 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "ideas")
 data class Idea (
-
     @ColumnInfo
     val title: String,
 
@@ -16,6 +15,10 @@ data class Idea (
     @ColumnInfo
     val description: String,
 ){
+    @ColumnInfo
+    var likes: Int = 0
+
+
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0
 }
