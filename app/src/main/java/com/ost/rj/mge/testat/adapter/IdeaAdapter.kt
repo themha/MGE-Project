@@ -5,18 +5,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.ost.rj.mge.testat.R
 import com.ost.rj.mge.testat.model.Idea
-import com.ost.rj.mge.testat.model.IdeaRepository
 
 class IdeaAdapter(
-    private var ideas: List<Idea>,
+    //private var ideas: List<Idea>,
     private val clickListener: (idea: Idea) -> Unit
 
 ): RecyclerView.Adapter<IdeaViewHolder>() {
+//Todo nicht ganz schön
+    private var ideas: List<Idea> = emptyList()
 
-    fun updateIdeas(ideas: List<Idea>){
+    fun updateData(ideas: List<Idea>){
         this.ideas = ideas
         this.notifyDataSetChanged()
     }
@@ -45,7 +47,7 @@ class IdeaAdapter(
         holder.itemView.setOnClickListener {v: View ->
             if (position != RecyclerView.NO_POSITION){
 
-                val idea : Idea = IdeaRepository.getIdeas()[position]
+                val idea : Idea = ideas[position]
                 clickListener(idea)
 
             }
@@ -57,3 +59,16 @@ class IdeaAdapter(
     }
 
 }
+
+/*
+class IdeaDiffCallback : DiffUtil.ItemCallback<Idea>() {
+    override fun areItemsTheSame(oldItem: Idea, newItem: Idea): Boolean {
+        return oldItem.id == newItem.id
+    }
+
+    override fun areContentsTheSame(oldItem: Idea, newItem: Idea): Boolean {
+        return oldItem == newItem
+    }
+
+}
+*/
