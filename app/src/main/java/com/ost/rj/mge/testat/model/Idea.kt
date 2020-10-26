@@ -14,11 +14,10 @@ data class Idea (
 
     @ColumnInfo
     val description: String,
-){
-    @ColumnInfo
-    var likes: Int = 0
-
 
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0
+){
+    @ColumnInfo
+    var likes: Int = 0
 }

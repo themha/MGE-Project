@@ -8,5 +8,6 @@ class IdeaApplication : Application() {
         super.onCreate()
 
         IdeaRepository.initialize(applicationContext)
+
     }
 }
