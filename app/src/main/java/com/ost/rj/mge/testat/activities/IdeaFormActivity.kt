@@ -5,14 +5,18 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.speech.RecognizerIntent
+import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.auth.FirebaseAuth
 import com.ost.rj.mge.testat.R
 import com.ost.rj.mge.testat.model.IdeaRepository
+import com.ost.rj.mge.testat.services.UserAuthentication
 import java.util.*
 
 
@@ -70,13 +74,22 @@ class IdeaFormActivity : AppCompatActivity() {
         saveButton.setOnClickListener {
 
             //TODO Input check
+            var user = UserAuthentication.getCurrentUser()
+            user?.let {
+                Log.d("test1234", user!!.uid)
 
-            IdeaRepository.addIdea(
-                title.text.toString(),
-                tags.text.toString(),
-                description.text.toString()
-            )
+                IdeaRepository.addIdea(
+                    title.text.toString(),
+                    tags.text.toString(),
+                    description.text.toString(),
+                    user!!.uid
+                )
 
+                finish()
+            }
+
+            Toast.makeText(this, "Please log in first to publish own ideas", Toast.LENGTH_LONG).show()
+            // TODO open login screen
             finish()
         }
 

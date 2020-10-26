@@ -1,6 +1,5 @@
-package com.ost.rj.mge.testat.services
+package com.ost.rj.mge.testat.model.storage.network
 
-import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -18,7 +17,7 @@ object RetrofitBuilder {
         .baseUrl(BASE_URL)
         .build()
 
-    val retrofitService: IdeasRemoteDbApi by lazy {retrofit.create(IdeasRemoteDbApi::class.java)}
+    val retrofitService: IdeasRemoteDbApi by lazy { retrofit.create(IdeasRemoteDbApi::class.java)}
 
 
 }

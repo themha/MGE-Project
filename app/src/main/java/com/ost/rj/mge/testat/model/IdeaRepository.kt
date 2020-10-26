@@ -1,16 +1,13 @@
 package com.ost.rj.mge.testat.model
 
 import android.content.Context
-import android.os.Handler
-import android.os.Looper
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.room.Room
 import com.ost.rj.mge.testat.model.storage.IdeaDatabase
-import com.ost.rj.mge.testat.services.RetrofitBuilder
+import com.ost.rj.mge.testat.model.storage.network.RetrofitBuilder
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import retrofit2.Response
 
 
 object IdeaRepository {
@@ -45,8 +42,8 @@ object IdeaRepository {
 
     }
 
-    fun addIdea(title: String, tags: String, description: String): Idea {
-        val idea = Idea(title, tags, description)
+    fun addIdea(title: String, tags: String, description: String, author: String): Idea {
+        val idea = Idea(title, tags, description, author)
 
         addIdea(idea)
 

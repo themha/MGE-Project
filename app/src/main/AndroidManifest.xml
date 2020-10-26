@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <service android:name=".services.RetrofitBuilder"
+        <service android:name=".model.storage.network.RetrofitBuilder"
             android:exported="false" />
 
         <activity android:name=".activities.IdeaFormActivity" />

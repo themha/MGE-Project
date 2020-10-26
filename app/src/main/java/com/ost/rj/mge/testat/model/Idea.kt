@@ -15,6 +15,9 @@ data class Idea (
     @ColumnInfo
     val description: String,
 
+    @ColumnInfo
+    val author: String,
+
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0
 ){

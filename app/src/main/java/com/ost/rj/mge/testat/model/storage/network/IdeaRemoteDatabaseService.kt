@@ -1,7 +1,5 @@
-package com.ost.rj.mge.testat.services
+package com.ost.rj.mge.testat.model.storage.network
 
-import androidx.room.ColumnInfo
-import androidx.room.PrimaryKey
 import com.ost.rj.mge.testat.model.Idea
 import retrofit2.Response
 import retrofit2.http.*
