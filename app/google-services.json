@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "755472484936",
+    "firebase_url": "https://ideasharingplatform.firebaseio.com",
+    "project_id": "ideasharingplatform",
+    "storage_bucket": "ideasharingplatform.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:755472484936:android:61e815902a91553d89267d",
+        "android_client_info": {
+          "package_name": "com.ost.rj.mge.testat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "755472484936-kme4admecvts4f8s8ssulfsscar2d265.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBtbis8Q_Q0xK645ZHV-_o8F3uAvQR4RNI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "755472484936-kme4admecvts4f8s8ssulfsscar2d265.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
