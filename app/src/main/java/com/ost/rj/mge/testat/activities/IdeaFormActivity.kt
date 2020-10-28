@@ -21,6 +21,8 @@ import java.util.*
 
 
 class IdeaFormActivity : AppCompatActivity() {
+    private var mAuth: FirebaseAuth? = null
+
     private lateinit var title: EditText
     private lateinit var tags: EditText
     private lateinit var description: EditText
@@ -42,6 +44,7 @@ class IdeaFormActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_idea_form)
+        mAuth = FirebaseAuth.getInstance()
 
         title = findViewById(R.id.idea_form_editText_title)
         title.setOnTouchListener { view: View, motionEvent ->
@@ -74,7 +77,7 @@ class IdeaFormActivity : AppCompatActivity() {
         saveButton.setOnClickListener {
 
             //TODO Input check
-            var user = UserAuthentication.getCurrentUser()
+            val user = mAuth!!.currentUser
             user?.let {
                 Log.d("test1234", user!!.uid)
 
