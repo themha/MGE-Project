@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.room.Room
 import com.ost.rj.mge.testat.model.storage.IdeaDatabase
+import com.ost.rj.mge.testat.model.storage.network.Likes
 import com.ost.rj.mge.testat.model.storage.network.RetrofitBuilder
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -43,7 +44,7 @@ object IdeaRepository {
     }
 
     fun addIdea(title: String, tags: String, description: String, author: String): Idea {
-        val idea = Idea(title, tags, description, author)
+        val idea = Idea(title, tags, description, author, "online")
 
         addIdea(idea)
 
@@ -60,6 +61,19 @@ object IdeaRepository {
         }
 
     }
+
+
+    fun addSupporterToIdea(id : String, count: Int){
+        GlobalScope.launch { // replace with viewModelScope
+            try {
+                RetrofitBuilder.retrofitService.patchSupporterToIdea(id, Likes(count))
+
+            } catch (e: Exception) {
+                Log.d("Test12345", e.toString())
+            }
+        }
+    }
+
 
 /*
     fun syncDatabase(handleFinish: () -> Unit){
@@ -86,7 +100,9 @@ object IdeaRepository {
  */
 
 
-    private fun addIdeaToLocalDatabase(idea: Idea) {
+    private fun addIdeaToLocalDatabase(id: String, idea: Idea) {
+        idea.id = id
+
         database.ideaDao().insert(idea)
     }
 
@@ -100,7 +116,7 @@ object IdeaRepository {
 
                     var map : HashMap<String, Idea> = response.body()!!
                     map.forEach{ (key, idea) -> run {
-                        addIdeaToLocalDatabase(idea)
+                        addIdeaToLocalDatabase(key, idea)
                     }}
                 }
                 Log.d("test1234", "in thread")

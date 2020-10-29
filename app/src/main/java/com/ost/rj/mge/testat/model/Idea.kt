@@ -18,9 +18,16 @@ data class Idea (
     @ColumnInfo
     val author: String,
 
-    @PrimaryKey(autoGenerate = true)
-    var id: Int = 0
-){
+    //@PrimaryKey(autoGenerate = true)
+    @PrimaryKey
+    var id: String,
+
     @ColumnInfo
     var likes: Int = 0
+){
+
+    //@ColumnInfo
+    //var supporters: ArrayList<String> = ArrayList()
 }
+
+// https://developer.android.com/training/data-storage/room/relationships

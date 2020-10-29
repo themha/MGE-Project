@@ -26,4 +26,11 @@ interface IdeasRemoteDbApi {
 
     @PUT("ideas")
     fun updateIdea(@Body Idea: Idea)
+
+    @Headers("Content-Type: application/json",
+        "Authorization: key=$API_AUTHKEY")
+    @PATCH("ideas/{id}.json")
+    suspend fun patchSupporterToIdea(@Path("id") id: String, @Body likes: Likes)
 }
+
+data class Likes(val likes: Int)
